@@ -1,8 +1,14 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { ItemsContext } from '../context';
 
-const Item = ({ item, update, remove }) => {
+type ItemProps = {
+  item: Item;
+};
+
+const Item = ({ item }: ItemProps) => {
   const [editing, setEditing] = useState(false);
+  const { update, remove } = useContext(ItemsContext);
 
   return (
     <li className="flex items-center gap-2">

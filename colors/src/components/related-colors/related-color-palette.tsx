@@ -1,14 +1,26 @@
+import { Dispatch } from 'react';
+import { ColorActions } from '../../lib/color-reducer';
 import ColorChangeSwatch from '../shared/color-change-swatch';
 
 type RelatedColorPaletteProps = {
   title: string;
   hexColors: string[];
+  dispatch: Dispatch<ColorActions>
 };
 
 const RelatedColorPalette = ({
   title,
   hexColors,
+  dispatch
 }: RelatedColorPaletteProps) => {
+
+  const changeColorHandler = (color: string) => {
+    dispatch({
+      type: 'update-hex-color',
+      payload: { hexColor: color }
+    })    
+  }
+
   return (
     <section>
       <h3 className="mb-4">{title}</h3>
@@ -19,6 +31,7 @@ const RelatedColorPalette = ({
               key={hexColor}
               hexColor={hexColor}
               className="w-full h-full"
+              onClick={() => changeColorHandler(hexColor)}
             />
           );
         })}
